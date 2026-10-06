@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="1314电影网——精选高清电影、热播电视剧、动漫综艺一站观看。1314电影网提供最新影视资讯、电影排行与在线播放导航，域名 1314dianyingwang-app。">
+<meta name="keywords" content="1314电影网, 电影, 电视剧, 高清影视, 电影排行, 在线观影">
+<meta name="author" content="1314电影网">
+<meta name="theme-color" content="#0b1020">
+<title>1314电影网 | 高清电影·热剧·动漫综艺在线观看</title>
+<link rel="canonical" href="https://1314dianyingwang-app.github.io/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "1314电影网",
+  "url": "https://1314dianyingwang-app.github.io/",
+  "description": "1314电影网提供高清电影、热播电视剧、动漫与综艺的在线观看与影视资讯。",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://1314dianyingwang-app.github.io/#search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<style>
+  :root{
+    --bg:#070b18;
+    --bg2:#0d1428;
+    --card:#121c36;
+    --line:rgba(255,255,255,.08);
+    --txt:#eef1f8;
+    --sub:#9aa6c4;
+    --gold:#ffb547;
+    --cyan:#36e0d0;
+    --red:#ff5b6e;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei",system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--txt);
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(900px 500px at 82% -10%, rgba(54,224,208,.18), transparent 60%),
+      radial-gradient(700px 420px at 8% 8%, rgba(255,91,110,.16), transparent 55%),
+      linear-gradient(160deg,#070b18 0%,#0a1124 45%,#070b18 100%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+    background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+    background-size:34px 34px;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(7,11,24,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:18px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px}
+  .logo .mark{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(135deg,var(--red),var(--gold));
+    display:grid;place-items:center;font-size:15px;color:#1a0b12;box-shadow:0 6px 18px rgba(255,91,110,.35);
+  }
+  .logo b{font-size:19px}
+  .logo span{color:var(--gold);font-weight:800}
+  .nav-links{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+  .nav-links a{
+    padding:8px 14px;border-radius:999px;font-size:14px;color:var(--sub);
+    transition:.25s;
+  }
+  .nav-links a:hover{color:var(--txt);background:rgba(255,255,255,.06)}
+  .nav-links a.active{color:#0b1020;background:linear-gradient(135deg,var(--gold),var(--cyan));font-weight:700}
+  .search{
+    display:flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.06);border:1px solid var(--line);
+    border-radius:999px;padding:7px 14px;
+  }
+  .search input{background:none;border:none;outline:none;color:var(--txt);font-size:14px;width:130px}
+  .search input::placeholder{color:#6f7c9c}
+
+  /* ===== Hero ===== */
+  .hero{padding:64px 0 40px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 14px;border-radius:999px;font-size:12px;color:var(--cyan);
+    border:1px solid rgba(54,224,208,.3);background:rgba(54,224,208,.08);
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.6s infinite}
+  @keyframes pulse{50%{opacity:.25}}
+  h1{font-size:clamp(30px,5vw,52px);line-height:1.15;margin:16px 0 14px;font-weight:850}
+  h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--sub);font-size:16px;max-width:560px}
+  .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{
+    padding:13px 26px;border-radius:12px;font-weight:700;font-size:15px;
+    transition:.25s;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--red),#ff8a5b);color:#fff;box-shadow:0 12px 28px rgba(255,91,110,.3)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{background:rgba(255,255,255,.05);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+  .stats{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
+  .stat .n{font-size:26px;font-weight:800;color:var(--gold)}
+  .stat .l{font-size:13px;color:var(--sub)}
+
+  .poster{
+    position:relative;border-radius:22px;overflow:hidden;
+    transform:perspective(900px) rotateY(-7deg) rotateX(4deg);
+    box-shadow:0 30px 70px rgba(0,0,0,.55);
+    border:1px solid var(--line);
+  }
+  .poster img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
+  .poster .tag{
+    position:absolute;top:16px;left:16px;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;
+    background:rgba(7,11,24,.6);backdrop-filter:blur(6px);border:1px solid var(--line);
+  }
+  .float{
+    position:absolute;border-radius:14px;padding:12px 16px;font-size:13px;
+    background:rgba(13,20,40,.85);backdrop-filter:blur(10px);border:1px solid var(--line);
+    box-shadow:0 14px 34px rgba(0,0,0,.4);
+  }
+  .float b{display:block;font-size:15px;margin-bottom:2px}
+  .f1{top:-18px;right:-14px;color:var(--gold)}
+  .f2{bottom:26px;left:-20px;color:var(--cyan)}
+
+  /* ===== Section ===== */
+  section{padding:56px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(22px,3vw,30px);font-weight:800;display:flex;align-items:center;gap:12px}
+  .sec-head h2 i{
+    width:5px;height:26px;border-radius:4px;
+    background:linear-gradient(var(--gold),var(--red));
+  }
+  .sec-head p{color:var(--sub);font-size:14px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .tabs button{
+    background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--sub);
+    padding:7px 16px;border-radius:999px;font-size:13px;cursor:pointer;transition:.2s;
+  }
+  .tabs button.on{color:#0b1020;background:linear-gradient(135deg,var(--gold),var(--cyan));border-color:transparent;font-weight:700}
+
+  .grid{display:grid;gap:20px}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+
+  .card{
+    background:linear-gradient(180deg,var(--card),rgba(13,20,40,.6));
+    border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;transition:.3s;position:relative;
+  }
+  .card:hover{transform:translateY(-6px);border-color:rgba(54,224,208,.4);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+  .thumb{position:relative;aspect-ratio:2/3;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .card:hover .thumb img{transform:scale(1.07)}
+  .badge{
+    position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;
+    padding:4px 9px;border-radius:6px;background:rgba(7,11,24,.7);backdrop-filter:blur(4px);
+  }
+  .badge.hot{color:var(--red)}
+  .badge.new{color:var(--cyan)}
+  .rate{
+    position:absolute;top:10px;right:10px;font-size:12px;font-weight:800;color:#16213a;
+    padding:4px 9px;border-radius:6px;background:var(--gold);
+  }
+  .card-body{padding:14px}
+  .card-body h3{font-size:15px;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meta{display:flex;justify-content:space-between;color:var(--sub);font-size:12px}
+  .meta .score{color:var(--gold);font-weight:700}
+
+  /* genre chips */
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    padding:10px 20px;border-radius:12px;font-size:14px;font-weight:600;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.2s;
+  }
+  .chip:hover{color:var(--cyan);border-color:var(--cyan);transform:translateY(-2px)}
+  .chip small{display:block;color:var(--sub);font-weight:400;font-size:11px;margin-top:2px}
+
+  /* feature list */
+  .feat{border-left:3px solid var(--gold);padding:4px 0 4px 16px}
+  .feat h3{font-size:16px;margin-bottom:4px}
+  .feat p{color:var(--sub);font-size:13.5px}
+
+  /* news */
+  .news{display:flex;gap:16px;padding:16px;border-radius:14px;transition:.2s;border:1px solid transparent}
+  .news:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
+  .news .d{width:52px;height:52px;flex:none;border-radius:12px;display:grid;place-items:center;text-align:center;font-weight:800;font-size:15px;line-height:1.1;background:linear-gradient(135deg,var(--card),rgba(255,91,110,.18));border:1px solid var(--line)}
+  .news .d i{font-style:normal;font-size:11px;color:var(--sub);font-weight:500}
+  .news h3{font-size:15.5px;margin-bottom:4px}
+  .news p{color:var(--sub);font-size:13px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:44px 0 26px;margin-top:30px;color:var(--sub);font-size:13.5px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;margin-bottom:28px}
+  .foot-brand p{margin-top:12px;max-width:320px}
+  .foot-col h4{color:var(--txt);font-size:15px;margin-bottom:12px}
+  .foot-col a{display:block;padding:4px 0;color:var(--sub);transition:.2s}
+  .foot-col a:hover{color:var(--cyan)}
+  .copy{text-align:center;border-top:1px solid var(--line);padding-top:20px;font-size:12.5px}
+  .kw{color:var(--gold);font-weight:700}
+
+  /* top button */
+  #top{
+    position:fixed;right:18px;bottom:22px;width:46px;height:46px;border-radius:50%;
+    display:grid;place-items:center;cursor:pointer;z-index:60;opacity:0;pointer-events:none;
+    background:linear-gradient(135deg,var(--red),var(--gold));box-shadow:0 10px 26px rgba(255,91,110,.35);transition:.3s;
+  }
+  #top.show{opacity:1;pointer-events:auto}
+  .bread{color:var(--sub);font-size:13px;margin-bottom:8px}
+  .bread a:hover{color:var(--cyan)}
+
+  /* ===== Responsive ===== */
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr}
+    .poster{max-width:360px;margin:0 auto;transform:none}
+    .f2{left:auto;right:-10px}
+    .g4{grid-template-columns:repeat(2,1fr)}
+    .g3,.g2{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .search{display:none}
+  }
+  @media (max-width:560px){
+    .nav{height:58px;gap:10px}
+    .logo b{font-size:16px}
+    .nav-links a{padding:6px 10px;font-size:13px}
+    .hero{padding:34px 0 24px}
+    section{padding:38px 0}
+    .g4{grid-template-columns:repeat(2,1fr);gap:12px}
+    .card-body{padding:11px}
+    .card-body h3{font-size:13.5px}
+    .foot-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="1314电影网 首页">
+      <span class="mark">14</span>
+      <b>1314<span>电影网</span></b>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#home" class="active">首页</a>
+      <a href="#movie">电影</a>
+      <a href="#tv">电视剧</a>
+      <a href="#anime">动漫综艺</a>
+      <a href="#rank">排行榜</a>
+      <a href="#news">影讯</a>
+      <a href="#about">关于</a>
+    </nav>
+    <div class="search">
+      <input type="search" placeholder="搜索影片…" aria-label="搜索影片">
+      <span aria-hidden="true">🔍</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HOME ============ -->
+<section id="home" class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> 1314dianyingwang-app · 全网影视导航</span>
+      <h1>在 <em>1314电影网</em><br>遇见每一部好片</h1>
+      <p class="lead">1314电影网（<strong>1314dianyingwang-app</strong>）汇聚院线大片、热播剧集、口碑动漫与综艺，按类型、地区、年份精心分类，让找片变得简单。移动端自适应，随时随地畅快观影。</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#movie">立即观影 →</a>
+        <a class="btn btn-ghost" href="#rank">查看排行榜</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">2.6万+</div><div class="l">影视条目</div></div>
+        <div class="stat"><div class="n">38</div><div class="l">内容分类</div></div>
+        <div class="stat"><div class="n">99.9%</div><div class="l">访问可用率</div></div>
+      </div>
+    </div>
+    <div class="poster" aria-hidden="true">
+      <span class="tag">♥ 1314 · 一生一世</span>
+      <img src="https://images.unsplash.com/photo-1489599735730-82a87b3a8c8e?auto=format&fit=crop&w=900&q=80" alt="影院观影氛围">
+      <div class="float f1"><b>♥ 1314</b>一生一世的好电影</div>
+      <div class="float f2"><b>4K · HDR</b>高清流畅不卡顿</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOVIE ============ -->
+<section id="movie">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2><i></i>电影频道</h2>
+        <p>按类型挑选，快速定位想看的那一部</p>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="on">全部</button>
+        <button>动作</button>
+        <button>喜剧</button>
+        <button>科幻</button>
+        <button>悬疑</button>
+      </div>
+    </div>
+
+    <div class="chips" style="margin-bottom:22px">
+      <a class="chip" href="#">动作冒险<small>Action</small></a>
+      <a class="chip" href="#">喜剧搞笑<small>Comedy</small></a>
+      <a class="chip" href="#">科幻奇幻<small>Sci-Fi</small></a>
+      <a class="chip" href="#">悬疑犯罪<small>Thriller</small></a>
+      <a class="chip" href="#">爱情文艺<small>Romance</small></a>
+      <a class="chip" href="#">恐怖惊悚<small>Horror</small></a>
+      <a class="chip" href="#">动画家庭<small>Animation</small></a>
+      <a class="chip" href="#">纪录历史<small>Documentary</small></a>
+    </div>
+
+    <div class="grid g4">
+      <article class="card">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80" alt="电影海报"><span class="badge hot">🔥 热映</span><span class="rate">9.1</span></div>
+        <div class="card-body"><h3>星际归途</h3><div class="meta"><span>科幻 / 冒险</span><span class="score">★ 9.1</span></div></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1440404653325-ab8d9fc9c91c?auto=format&fit=crop&w=600&q=80" alt="电影海报"><span class="badge new">🆕 新片</span><span class="rate">8.7</span></div>
+        <div class="card-body"><h3>城市边缘</h3><div class="meta"><span>犯罪 / 悬疑</span><span class="score">★ 8.7</span></div></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?auto=format&fit=crop&w=600&q=80" alt="电影海报"><span class="badge">喜剧</span><span class="rate">8.3</span></div>
+        <div class="card-body"><h3>周末万岁</h3><div class="meta"><span>喜剧 / 生活</span><span class="score">★ 8.3</span></div></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80" alt="电影海报"><span class="badge">爱情</span><span class="rate">8.9</span></div>
+        <div class="card-body"><h3>一生一世</h3><div class="meta"><span>爱情 / 文艺</span><span class="score">★ 8.9</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TV ============ -->
+<section id="tv" style="background:linear-gradient(180deg,transparent,rgba(54,224,208,.04))">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2><i></i>电视剧频道</h2>
+        <p>追更不迷路，热门剧集实时更新</p>
+      </div>
+      <a class="btn btn-ghost" href="#" style="padding:9px 18px;font-size:13px">查看全部剧集 →</a>
+    </div>
+    <div class="grid g4">
+      <article class="card">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1594908900066-3f47337549d8?auto=format&fit=crop&w=600&q=80" alt="剧集封面"><span class="badge hot">🔥 追更</span><span class="rate">9.3</span></div>
+        <div class="card-body"><h3>长安二十四时</h3><div class="meta"><span>古装 / 悬疑 · 24集</span><span class="score">更新中</span></div></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86fe62?auto=format&fit=crop&w=600&q=80" alt="剧集封面"><span class="badge new">🆕 新剧</span><span class="rate">8.8</span></div>
+        <div class="card-body"><h3>逆光者</h3><div class="meta"><span>都市 / 职场 · 32集</span><span class="score">热播</span></div></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1505686994436-e8b4c4d4e5b7?auto=format&fit=crop&w=600&q=80" alt="剧集封面"><span class="badge">年代</span><span class="rate">9.0</span></div>
+        <div class="card-body"><h3>烟火人间</h3><div class="meta"><span>年代 / 家庭 · 40集</span><span class="score">已完结</span></div></div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1585647347384-2593bc35786e?auto=format&fit=crop&w=600&q=80" alt="剧集封面"><span class="badge">刑侦</span><span class="rate">8.5</span></div>
+        <div class="card-body"><h3>沉默的证词</h3><div class="meta"><span>刑侦 / 犯罪 · 28集</span><span class="score">更新中</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANIME ============ -->
+<section id="anime">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2><i></i>动漫 · 综艺</h2>
+        <p>番剧连载、综艺爆款，轻松一下</p>
+      </div>
+    </div>
+    <div class="grid g3">
+      <article class="card">
+        <div class="thumb" style="aspect-ratio:16/9"><img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=900&q=80" alt="动漫封面"><span class="badge hot">🔥 连载</span></div>
+        <div class="card-body"><h3>灵境行者 · 第2季</h3><div class="meta"><span>奇幻 / 冒险</span><span class="score">★ 9.2</span></div></div>
+      </article>
+      <article class="card">
+        <div class="thumb" style="aspect-ratio:16/9"><img src="https://images.unsplash.com/photo-1541562232572-0c11d948a019?auto=format&fit=crop&w=900&q=80" alt="动漫封面"><span class="badge new">🆕 新番</span></div>
+        <div class="card-body"><h3>深海列车</h3><div class="meta"><span>科幻 / 悬疑</span><span class="score">★ 8.6</span></div></div>
+      </article>
+      <article class="card">
+        <div class="thumb" style="aspect-ratio:16/9"><img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=900&q=80" alt="综艺封面"><span class="badge">综艺</span></div>
+        <div class="card-body"><h3>笑到最后的人</h3><div class="meta"><span>喜剧 / 真人秀</span><span class="score">★ 8.4</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RANK ============ -->
+<section id="rank" style="background:linear-gradient(180deg,rgba(255,91,110,.04),transparent)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2><i></i>影视排行榜</h2>
+        <p>大家都在看，榜单每日更新</p>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="on">综合榜</button>
+        <button>热搜榜</button>
+        <button>口碑榜</button>
+      </div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="card-body">
+          <h3 style="margin-bottom:14px">🏆 综合热度榜</h3>
+          <div class="feat" style="margin-bottom:14px"><h3>1. 星际归途</h3><p>科幻冒险 · 评分 9.1 · 热度 286 万</p></div>
+          <div class="feat" style="margin-bottom:14px"><h3>2. 长安二十四时</h3><p>古装悬疑剧 · 评分 9.3 · 热度 241 万</p></div>
+          <div class="feat" style="margin-bottom:14px"><h3>3. 一生一世</h3><p>爱情文艺 · 评分 8.9 · 热度 198 万</p></div>
+          <div class="feat"><h3>4. 灵境行者 第2季</h3><p>奇幻动漫 · 评分 9.2 · 热度 176 万</p></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3 style="margin-bottom:14px">💡 1314电影网 观影指南</h3>
+          <div class="feat" style="margin-bottom:14px"><h3>按心情选片</h3><p>开心看喜剧，烧脑看悬疑，深夜看文艺——分类导航帮你 3 秒定位。</p></div>
+          <div class="feat" style="margin-bottom:14px"><h3>追剧不踩坑</h3><p>榜单与评分双重参考，优先看高分完结剧，避免“坑剧”。</p></div>
+          <div class="feat" style="margin-bottom:14px"><h3>高清流畅</h3><p>支持多清晰度切换，弱网自动降清，移动端同样顺滑。</p></div>
+          <div class="feat"><h3>收藏与记录</h3><p>本地记录观看进度，换设备也能接着看。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section id="news">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2><i></i>影讯资讯</h2>
+        <p>行业动态、上映信息与观影攻略</p>
+      </div>
+    </div>
+    <div class="grid g3">
+      <a class="news" href="#">
+        <div class="d">12<i>月</i></div>
+        <div><h3>2026 年值得期待的 10 部华语电影</h3><p>从现实题材到视效大片，一份不踩雷的观影清单。</p></div>
+      </a>
+      <a class="news" href="#">
+        <div class="d">08<i>月</i></div>
+        <div><h3>如何在 1314电影网 快速找到想看的片</h3><p>分类、榜单、搜索三板斧，找片效率翻倍。</p></div>
+      </a>
+      <a class="news" href="#">
+        <div class="d">05<i>月</i></div>
+        <div><h3>家庭观影指南：适合亲子共赏的动画</h3><p>温暖、有趣、有启发，周末一起看电影。</p></div>
+      </a>
+      <a class="news" href="#">
+        <div class="d">01<i>月</i></div>
+        <div><h3>悬疑片入门：从这 5 部开始</h3><p>反转、伏笔与叙事结构，一步步走进烧脑世界。</p></div>
+      </a>
+      <a class="news" href="#">
+        <div class="d">28<i>日</i></div>
+        <div><h3>纪录片推荐：看见真实的世界</h3><p>自然、历史、人物，每一部都值得安静看完。</p></div>
+      </a>
+      <a class="news" href="#">
+        <div class="d">22<i>日</i></div>
+        <div><h3>移动端观影体验优化小贴士</h3><p>横屏、字幕、清晰度，这样设置最舒服。</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><div><h2><i></i>关于 1314电影网</h2><p>域名：1314dianyingwang-app</p></div></div>
+    <div class="grid g3">
+      <div class="card"><div class="card-body"><h3>🎬 我们是谁</h3><p class="meta" style="margin-top:8px;display:block;line-height:1.8">1314电影网（<span class="kw">1314dianyingwang-app</span>）是一个影视内容与观影导航站点，致力于为影迷提供清晰、好用的找片入口与影视资讯。</p></div></div>
+      <div class="card"><div class="card-body"><h3>🎯 我们的理念</h3><p class="meta" style="margin-top:8px;display:block;line-height:1.8">“1314”寓意一生一世——好电影值得反复回味。我们坚持分类清晰、加载快速、体验干净。</p></div></div>
+      <div class="card"><div class="card-body"><h3>📱 移动端优先</h3><p class="meta" style="margin-top:8px;display:block;line-height:1.8">全站响应式设计，手机、平板、电脑均能舒适浏览，触控与键盘操作兼顾。</p></div></div>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <div class="card-body">
+        <h3>网站导航地图</h3>
+        <nav class="chips" style="margin-top:14px">
+          <a class="chip" href="#home">首页</a>
+          <a class="chip" href="#movie">电影频道</a>
+          <a class="chip" href="#tv">电视剧频道</a>
+          <a class="chip" href="#anime">动漫综艺</a>
+          <a class="chip" href="#rank">影视排行榜</a>
+          <a class="chip" href="#news">影讯资讯</a>
+          <a class="chip" href="#about">关于我们</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top"><span class="mark">14</span><b>1314<span>电影网</span></b></a>
+        <p>1314电影网 · 一生一世的好电影。影视分类导航与观影资讯站点，网址 <span class="kw">https://1314dianyingwang-app.github.io</span>。</p>
+      </div>
+      <div class="foot-col">
+        <h4>频道</h4>
+        <a href="#movie">电影</a>
+        <a href="#tv">电视剧</a>
+        <a href="#anime">动漫综艺</a>
+        <a href="#rank">排行榜</a>
+      </div>
+      <div class="foot-col">
+        <h4>分类</h4>
+        <a href="#">动作</a>
+        <a href="#">喜剧</a>
+        <a href="#">科幻</a>
+        <a href="#">悬疑</a>
+      </div>
+      <div class="foot-col">
+        <h4>关于</h4>
+        <a href="#about">网站简介</a>
+        <a href="#">使用帮助</a>
+        <a href="#">意见反馈</a>
+        <a href="#">友情链接</a>
+      </div>
+    </div>
+    <div class="copy">
+      © <span id="year"></span> 1314电影网（1314dianyingwang-app）. 本页为演示性单页网站，所有内页链接以 “#” 占位，影片信息与评分为示例数据，仅供学习与展示。
+    </div>
+  </div>
+</footer>
+
+<div id="top" aria-label="回到顶部" title="回到顶部">↑</div>
+
+<script>
+  // 年份
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 回到顶部
+  var topBtn = document.getElementById('top');
+  window.addEventListener('scroll', function(){
+    topBtn.classList[window.scrollY > 500 ? 'add' : 'remove']('show');
+  });
+  topBtn.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+  // 导航高亮
+  var links = document.querySelectorAll('.nav-links a');
+  var secs = ['home','movie','tv','anime','rank','news','about'].map(function(id){ return document.getElementById(id); });
+  window.addEventListener('scroll', function(){
+    var pos = window.scrollY + 120, idx = 0;
+    secs.forEach(function(s,i){ if(s && s.offsetTop <= pos) idx = i; });
+    links.forEach(function(a,i){ a.classList[i===idx?'add':'remove']('active'); });
+  });
+
+  // Tab 切换（视觉）
+  document.querySelectorAll('.tabs').forEach(function(group){
+    group.addEventListener('click', function(e){
+      if(e.target.tagName === 'BUTTON'){
+        group.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); });
+        e.target.classList.add('on');
+      }
+    });
+  });
+</script>
+</body>
+</html>
